@@ -22,7 +22,8 @@ public class Cycle {
     }
 
     public int daysBetweenFirstJan2018AndCreated() {
-        return Days.daysBetween(new DateTime(2018, 01, 01, 0, 0, 0), createdAt).getDays();
+        final DateTime firstJan2018 = new DateTime(2018, 01, 01, 0, 0, 0);
+        return Days.daysBetween(firstJan2018, createdAt).getDays();
     }
 
     public Date getStartDateBeginningOfDay() {
@@ -37,8 +38,11 @@ public class Cycle {
         return new Duration(createdAt, startDate).getStandardDays();
     }
 
-    public Date beginningOfStartMonth() {
-        return startDate.dayOfMonth().withMaximumValue().withTimeAtStartOfDay().minusMonths(1)
+    public Date lastDayOfPreviousMonth() {
+        return startDate.dayOfMonth()
+                .withMaximumValue()
+                .withTimeAtStartOfDay()
+                .minusMonths(1)
                 .toDate();
     }
 
