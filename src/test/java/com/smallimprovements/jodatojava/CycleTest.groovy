@@ -20,7 +20,7 @@ class CycleTest extends Specification {
                 .daysBetweenFirstJan2018AndCreated() == 31
     }
 
-    def "GetStartDateBeginningOfDay"() {
+    def "GetStartDateBeginingOfDay"() {
         expect: new Cycle(new DateTime(), new DateTime(2018, 01, 01, 10, 50))
                 .getStartDateBeginningOfDay() == new DateTime(2018, 01, 01, 0, 0).toDate()
     }
@@ -34,8 +34,7 @@ class CycleTest extends Specification {
         expect: new Cycle(new DateTime(), new DateTime().plusDays(2)).daysBetweenCreateAndStartDates() == 2
     }
 
-    def "LastDayOfPreviousMonth"() {
-        expect: new Cycle(new DateTime(), new DateTime(2018, 01, 28, 0, 0))
-                .lastDayOfPreviousMonth() == new DateTime(2017, 12, 31, 0, 0).toDate()
+    def "BeginningOfStartMonth"() {
+        expect: new Cycle(new DateTime(), new DateTime(2018, 01, 28, 0, 0)).beginningOfStartMonth() == new DateTime(2018, 01, 01, 0, 0)
     }
 }
