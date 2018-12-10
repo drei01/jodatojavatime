@@ -2,10 +2,7 @@ package com.smallimprovements.jodatojava;
 
 import lombok.Value;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
@@ -40,10 +37,13 @@ public class Cycle {
     }
 
     public Date lastDayOfPreviousMonth() {
-        return Date.from(startDate
-                .truncatedTo(ChronoUnit.DAYS)
+        final LocalDate localDateTime = LocalDate.ofInstant(this.startDate, ZoneId.systemDefault());
+        return Date.from(localDateTime
+                .withDayOfMonth(localDateTime.lengthOfMonth())
+                .minusMonths(1)
+                .atStartOfDay()
                 .atZone(ZoneId.systemDefault())
-                .minus(1, ChronoUnit.MONTHS).toInstant());
+                .toInstant());
     }
 
 
